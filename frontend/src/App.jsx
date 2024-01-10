@@ -1,8 +1,49 @@
 import React from 'react';
-import { useEffect, useState } from 'react';
-import './App.css';
-import { ethers } from 'ethers';
-import JavaScriptQuiz2 from './contracts/JavaScriptQuiz2.json';
+import { useEffect, useState } from 'react'
+import './App.css'
+import {ethers} from 'ethers'
+import JavaScriptQuiz2 from './contracts/JavaScriptQuiz2.json'
+import { createBrowserRouter, RouterProvider, Link } from 'react-router-dom'
+// Import les différents components
+import Chat from './components/Chat'
+import AllChats from './components/AllChats'
+import Home from './components/Home'
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <div>
+        <Home/>
+        <nav>
+        <Link to="/">Page accueil</Link>
+        <Link to="/allchats">Lists des chats</Link>
+        <Link to="/chat">Chat</Link>
+      </nav>
+      </div>
+  },
+  {
+    path: "/chat",
+    element: <div>
+      <Chat/>
+      <nav>
+        <Link to="/">Page accueil</Link>
+        <Link to="/allchats">Lists des chats</Link>
+        <Link to="/chat">Chat</Link>
+      </nav>
+    </div>
+  },
+  {
+    path: "/allchats",
+    element: <div>
+      <AllChats/>
+      <nav>
+        <Link to="/">Page accueil</Link>
+        <Link to="/allchats">Lists des chats</Link>
+        <Link to="/chat">Chat</Link>
+      </nav>
+    </div>
+  }
+])
 
 function App() {
   const [account, setAccount] = useState([])
@@ -69,85 +110,11 @@ function App() {
 
   return (
     <>
-<div className="homepage">
-  <header>
-    <h1>ChatCrypt</h1>
-    <p>Une messagerie sécurisée basée sur la technologie Web3.</p>
-  </header>
-  <main>
-    <div className='bg_hp_header'> </div>
-    <div className="main">
-      <section className="instructions">
-        <h2>Comment utiliser l'application :</h2>
-        <div class="steps">
-          <div class="container_number_steps">
-            <div class="numbers_steps">1</div>
-            <div class="numbers_content">Connectez-vous de maniére sécurisée.</div>
-          </div>
-          <div class="container_number_steps">
-            <div class="numbers_steps">2</div>
-          <div class="numbers_content">Commencez à chatter de manière confidentielle.</div>
-          </div>
-          <div class="container_number_steps">
-            <div class="numbers_steps">3</div>
-          <div class="numbers_content">Explorez les fonctionnalités de sécurité avancées.</div>
-          </div>
-        </div>
-      </section>
-
-      <section className="visuals">
-      <h2>Nos valeurs :</h2>
-      <div class="container_values">
-        <div className='values'>
-          <div className="confiance">
-            <div>La confiance</div>
-          </div>
-        </div>
-        <div className='values'>
-          <div className="securite">
-            <div>La sécurité</div>
-          </div>
-        </div>
-        <div className='values'>
-          <div className="discretion">
-            <div>La discrétion</div>
-          </div>
-        </div>
-      </div>
-    </section>
 
 
-    <section className="testimonials">
-      <h2>Ce que nos utilisateurs disent :</h2>
-      <div className="testimonial">
-        <p>"Une expérience de messagerie vraiment sécurisée. J'adore!"</p>
-        <p>- Alice</p>
-      </div>
-    </section>
-
-    <section className="web3-presentation">
-      <h2>Explorez le Web3 avec ChatCrypt :</h2>
-      <p>Découvrez comment nous utilisons la technologie Web3 pour garantir la confidentialité de vos messages.</p>
-    </section>
-
-    <section className="about-us">
-      <h2>À propos de ChatCrypt :</h2>
-      <p>Notre mission est de fournir une plateforme de messagerie sécurisée qui respecte votre vie privée.</p>
-    </section>
-
-    <footer className="social-media">
-      <h2>Rejoignez-nous sur les réseaux sociaux :</h2>
-      <div className="social-icons">
-        <a href="lien-vers-votre-page-facebook"><img src="icone-facebook.png" alt="Facebook" /></a>
-        <a href="lien-vers-votre-page-twitter"><img src="icone-twitter.png" alt="Twitter" /></a>
-      </div>
-    </footer>
-  </div>
-</main>
-</div>
-
-
-  </>
+<h2>Current account : {account[0]}</h2>
+      <RouterProvider router={router}/>
+    </>
   )
 }
 
