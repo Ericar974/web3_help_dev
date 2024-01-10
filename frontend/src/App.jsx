@@ -110,23 +110,8 @@ function App() {
   return (
     <>
       <h2>Current account : {account[0]}</h2>
-    <h3>{question}</h3>
-    <ul>
-      {answers.map((answer, index) => (
-        <li key={index}>{answer}</li>
-      ))}
-    </ul>
-    <input
-        type="text"
-        placeholder="Your answer"
-        value={input}
-        onChange={(e) => setInput(e.target.value)}
-    />
-    <button onClick={handleSubmit}>Submit</button>
-
-    {error && <p className="error">{error}</p>}
-    <RouterProvider router={router}/>
-  </>
+      <RouterProvider router={router}/>
+    </>
   )
 }
 
