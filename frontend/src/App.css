@@ -98,6 +98,47 @@ body {
   color: white;
 }
 
+/* Style de la barre de navigation */
+.nav {
+  background-color: #333; /* Dark background color */
+  padding: 10px; /* Padding for better spacing */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav div{
+  display: flex;
+}
+
+/* Style des liens dans la barre de navigation */
+.nav a {
+  color: #fff; /* Text color */
+  text-decoration: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  transition: background-color 0.3s, color 0.3s;
+  display: flex;
+  align-items: center; /* Alignement vertical */
+}
+
+/* Changement de couleur au survol des liens */
+.nav a:hover {
+  background-color: #555; /* Darker color on hover */
+}
+
+/* Logo styling */
+.nav .logo {
+  height: 50px; /* Adjust the height of your logo */
+}
+
+/* Current link styling */
+.nav .current {
+  border-bottom: 2px solid #61dafb; /* Lighter color for the current link */
+}
+
+
+
 header {
   text-align: center;
 }
@@ -108,27 +149,6 @@ h1 {
 
 p {
   color: #555;
-}
-
-nav {
-  display: flex;
-  justify-content: space-around;
-  width: 33%;
-  margin: 0 auto;
-  background-color: lightgray;
-}
-
-nav a {
-  text-decoration: none;
-  color: rgb(65, 65, 65);
-}
-
-nav li {
-  color: red;
-  margin: 0 0.8rem;
-  font-size: 1.3rem;
-  position: relative;
-  list-style: none;
 }
 
 .current {
@@ -226,7 +246,6 @@ li {
 }
 
 .header_logo{
-  background-color: black;
   display: flex;
   gap: 50px;
 }

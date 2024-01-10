@@ -13,33 +13,71 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <div>
-        <nav>
-        <Link to="/">Page accueil</Link>
-        <Link to="/allchats">Lists des chats</Link>
-        <Link to="/chat">Chat</Link>
+      <nav className="nav">
+        <div>
+          
+  <div className="header_logo">
+    <img className="logo" src="../src/assets/logo.png"></img>
+  </div>
+          <Link to="/" className="nav-link" activeClassName="current">
+            Page accueil
+          </Link>
+          <Link to="/allchats" className="nav-link" activeClassName="current">
+            Lists des chats
+          </Link>
+          <Link to="/chat" className="nav-link" activeClassName="current">
+            Chat
+          </Link>
+        </div>
       </nav>
+
       <Home/>
       </div>
   },
   {
     path: "/chat",
     element: <div>
-      <nav>
-        <Link to="/">Page accueil</Link>
-        <Link to="/allchats">Lists des chats</Link>
-        <Link to="/chat">Chat</Link>
+      <nav className="nav">
+        <div>
+          <div className="header_logo">
+            <img className="logo" src="../src/assets/logo.png"></img>
+          </div>
+          <Link to="/" className="nav-link" activeClassName="current">
+            Page accueil
+          </Link>
+          <Link to="/allchats" className="nav-link" activeClassName="current">
+            Lists des chats
+          </Link>
+          <Link to="/chat" className="nav-link" activeClassName="current">
+            Chat
+          </Link>
+        </div>
       </nav>
+
       <Chat/>
     </div>
   },
   {
     path: "/allchats",
     element: <div>
-      <nav>
-        <Link to="/">Page accueil</Link>
-        <Link to="/allchats">Lists des chats</Link>
-        <Link to="/chat">Chat</Link>
+      <nav className="nav">
+        <div>
+          
+  <div className="header_logo">
+    <img className="logo" src="../src/assets/logo.png"></img>
+  </div>
+          <Link to="/" className="nav-link" activeClassName="current">
+            Page accueil
+          </Link>
+          <Link to="/allchats" className="nav-link" activeClassName="current">
+            Lists des chats
+          </Link>
+          <Link to="/chat" className="nav-link" activeClassName="current">
+            Chat
+          </Link>
+        </div>
       </nav>
+
       <AllChats/>
     </div>
   }
@@ -112,11 +150,6 @@ function App() {
     <>
 
 <header>
-  <div className="header_logo">
-    <img className="logo" src="../src/assets/logo.png"></img>
-
-    <h2>Current account : {account[0]}</h2>  
-  </div>
   </header>
       <RouterProvider router={router}/>
     </>
