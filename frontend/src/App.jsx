@@ -2,6 +2,32 @@ import { useEffect, useState } from 'react'
 import './App.css'
 import {ethers} from 'ethers'
 import JavaScriptQuiz2 from './contracts/JavaScriptQuiz2.json'
+import { createBrowserRouter, RouterProvider, Link } from 'react-router-dom'
+// Import les différents components
+import Chat from './components/Chat'
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <div>
+        Page d'accueil
+        <nav>
+          <Link to="/chat">Chats</Link>
+          <Link to="/">Page accueil</Link>
+        </nav>
+      </div>
+  },
+  {
+    path: "/chat",
+    element: <div>
+      Liste des Chats
+      <nav>
+          <Link to="/chat">Chats</Link>
+          <Link to="/">Page accueil</Link>
+        </nav>
+    </div>
+  }
+])
 
 function App() {
   const [account, setAccount] = useState([])
@@ -84,6 +110,7 @@ function App() {
     <button onClick={handleSubmit}>Submit</button>
 
     {error && <p className="error">{error}</p>}
+    <RouterProvider router={router}/>
   </>
   )
 }
