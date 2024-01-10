@@ -13,34 +13,34 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <div>
-        <Home/>
         <nav>
         <Link to="/">Page accueil</Link>
         <Link to="/allchats">Lists des chats</Link>
         <Link to="/chat">Chat</Link>
       </nav>
+      <Home/>
       </div>
   },
   {
     path: "/chat",
     element: <div>
-      <Chat/>
       <nav>
         <Link to="/">Page accueil</Link>
         <Link to="/allchats">Lists des chats</Link>
         <Link to="/chat">Chat</Link>
       </nav>
+      <Chat/>
     </div>
   },
   {
     path: "/allchats",
     element: <div>
-      <AllChats/>
       <nav>
         <Link to="/">Page accueil</Link>
         <Link to="/allchats">Lists des chats</Link>
         <Link to="/chat">Chat</Link>
       </nav>
+      <AllChats/>
     </div>
   }
 ])

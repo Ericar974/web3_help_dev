@@ -19,7 +19,7 @@
 /* Css HP */
 
 body {
-  font-family: 'Arial', sans-serif;
+  font-family: "Arial", sans-serif;
   margin: 0;
 }
 
@@ -42,13 +42,15 @@ body {
   padding: 20px;
 }
 
-.steps{
+.steps {
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
 
-.confiance, .discretion, .securite {
+.confiance,
+.discretion,
+.securite {
   background-position: 50% 50%;
   background-repeat: no-repeat;
   background-size: cover;
@@ -58,7 +60,9 @@ body {
   align-items: center;
 }
 
-.confiance div, .discretion div , .securite div {
+.confiance div,
+.discretion div,
+.securite div {
   font-size: 1.5rem;
   font-weight: 700;
   text-transform: uppercase;
@@ -72,25 +76,23 @@ body {
   background-image: url("../src/assets/confiance.jpg");
 }
 
-.discretion{
+.discretion {
   background-image: url("../src/assets/discretion.jpg");
   background-position: 50% 50%;
-
 }
 
-.securite{
+.securite {
   background-image: url("../src/assets/securite.jpg");
   background-position: 100% 50%;
-
 }
 
-.container_values{
+.container_values {
   display: flex;
   justify-content: space-between;
   gap: 15px;
 }
 
-.values{
+.values {
   display: flex;
   width: 33%;
   color: white;
@@ -108,6 +110,31 @@ p {
   color: #555;
 }
 
+nav {
+  display: flex;
+  justify-content: space-around;
+  width: 33%;
+  margin: 0 auto;
+  background-color: lightgray;
+}
+
+nav a {
+  text-decoration: none;
+  color: rgb(65, 65, 65);
+}
+
+nav li {
+  color: red;
+  margin: 0 0.8rem;
+  font-size: 1.3rem;
+  position: relative;
+  list-style: none;
+}
+
+.current {
+  border-bottom: 2px solid black;
+}
+
 .instructions {
   margin-bottom: 20px;
 }
@@ -122,7 +149,7 @@ li {
 }
 
 .call-to-action {
-  background-color: #4CAF50;
+  background-color: #4caf50;
   color: #fff;
   padding: 15px;
   text-align: center;
@@ -161,7 +188,6 @@ li {
   margin-top: 20px;
 }
 
-
 .container_number_steps {
   display: flex;
   gap: 35px;
@@ -179,7 +205,7 @@ li {
   justify-content: center;
   border-radius: 100%;
   padding: 10px 15px;
-  background-color: #7C9FDC;
+  background-color: #7c9fdc;
   font-weight: 600;
 }
 
