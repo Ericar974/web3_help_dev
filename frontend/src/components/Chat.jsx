@@ -4,7 +4,7 @@ const Chat = () => {
   return (
     <div>
       <h2>Chat Page</h2>
-      {/* Contenu de la page de contact */}
+      {/* Contenu de la page de chat */}
     </div>
   );
 };
