@@ -1,15 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { ethers } from 'ethers';
-import Conversation from '../contracts/Conversation.json'
+import PropTypes from 'prop-types';
 
-const contractAddress = "0x7e58b4aCeE425A468C875f5e431E7728FD6e23b7"
-const contractAbi = Conversation.abi
-
-const Chat = () => {
+const Chat = ({contractAddress, contractAbi}) => {
   const [accounts, setAccounts] = useState([])
   const [contract, setContract] = useState(null)
   const [password, setPassword] = useState('');
-  const [hasAccess, setHasAccess] = useState(false);  // Nouvel état pour hasAccess
+  const [hasAccess, setHasAccess] = useState(false); 
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState('');
 
@@ -17,20 +14,19 @@ const Chat = () => {
     const init = async () => {
       if (window.ethereum) {
         try {
+          //connect to account
           const accounts = await window.ethereum.request({method: "eth_requestAccounts"})
           setAccounts(accounts)
-
           const provider = new ethers.BrowserProvider(window.ethereum)
           const signer = await provider.getSigner();
-
           const contract = new ethers.Contract(contractAddress, contractAbi, signer);
           setContract(contract)
 
-          // Appeler la fonction du contrat pour vérifier l'accès au chat
-          const hasAccess = await contract.accessChat1();
+          // Access to the chat ?
+          const hasAccess = await contract.accessChat1(accounts[0]);
           setHasAccess(hasAccess);
 
-          // Si l'accès est autorisé, récupérer les 10 derniers messages
+          // if it's, show 10last message
           if (hasAccess) {
             const latestMessages = await contract.Chat1GetLast10MessagesFromAllUsers();
             setMessages(latestMessages);
@@ -46,15 +42,15 @@ const Chat = () => {
     init();
   }, [contractAddress, contractAbi]);
 
+  // password form
   const handlePasswordSubmit = async (e) => {
     e.preventDefault();
     try {
       await contract.EnterChat1(password);
-      // Vérifier à nouveau l'accès au chat après la tentative d'entrée
-      const hasAccess = await contract.accessChat1();
+      // show if has access to the chat now
+      const hasAccess = await contract.accessChat1(accounts[0]);
       setHasAccess(hasAccess);
 
-      // Si l'accès est autorisé, récupérer les 10 derniers messages
       if (hasAccess) {
         const latestMessages = await contract.Chat1GetLast10MessagesFromAllUsers();
         setMessages(latestMessages);
@@ -64,12 +60,12 @@ const Chat = () => {
     }
   };
 
+  // new message
   const handleNewMessageSubmit = async (e) => {
     e.preventDefault();
     try {
       await contract.chat1PostMessage(newMessage);
 
-      // Rafraîchir les messages après l'envoi d'un nouveau message
       const latestMessages = await contract.Chat1GetLast10MessagesFromAllUsers();
       setMessages(latestMessages);
     } catch (error) {
@@ -107,6 +103,11 @@ const Chat = () => {
       )}
     </div>
   );
+};
+
+Chat.propTypes = {
+  contractAddress: PropTypes.string.isRequired,
+  contractAbi: PropTypes.array.isRequired,
 };
 
 export default Chat;

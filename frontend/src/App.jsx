@@ -5,6 +5,10 @@ import { createBrowserRouter, RouterProvider, Link } from 'react-router-dom'
 import Chat from './components/Chat'
 import AllChats from './components/AllChats'
 import Home from './components/Home'
+import Conversation from './contracts/Conversation.json'
+
+const contractAddress = "0x7329D7c384C9c5c1f4f520Ba4d3E9e86aF66B638"
+const contractAbi = Conversation.abi
 
 const router = createBrowserRouter([
   {
@@ -24,7 +28,7 @@ const router = createBrowserRouter([
         <Link to="/">Page accueil</Link>
         <Link to="/allchats">Lists des chats</Link>
       </nav>
-      <Chat
+      <Chat contractAddress={contractAddress} contractAbi={contractAbi}
       />
     </div>
   },
@@ -35,7 +39,7 @@ const router = createBrowserRouter([
         <Link to="/">Page accueil</Link>
         <Link to="/allchats">Lists des chats</Link>
       </nav>
-      <AllChats
+      <AllChats contractAddress={contractAddress} contractAbi={contractAbi}
       />
     </div>
   }
