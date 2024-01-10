@@ -1,3 +1,4 @@
+import React from 'react';
 import { useEffect, useState } from 'react'
 import './App.css'
 import {ethers} from 'ethers'
@@ -109,7 +110,9 @@ function App() {
 
   return (
     <>
-      <h2>Current account : {account[0]}</h2>
+
+
+<h2>Current account : {account[0]}</h2>
       <RouterProvider router={router}/>
     </>
   )
