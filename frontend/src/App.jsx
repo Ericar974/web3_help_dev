@@ -111,8 +111,13 @@ function App() {
   return (
     <>
 
+<header>
+  <div className="header_logo">
+    <img className="logo" src="../src/assets/logo.png"></img>
 
-<h2>Current account : {account[0]}</h2>
+    <h2>Current account : {account[0]}</h2>  
+  </div>
+  </header>
       <RouterProvider router={router}/>
     </>
   )
