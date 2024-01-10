@@ -1,7 +1,5 @@
 #root {
-  max-width: 1280px;
   margin: 0 auto;
-  padding: 2rem;
   text-align: center;
 }
 
@@ -18,6 +16,169 @@
   filter: drop-shadow(0 0 2em #61dafbaa);
 }
 
+/* Css HP */
+
+body {
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+}
+
+.bg_hp_header {
+  background-image: url("../src/assets/HP_banniere.png");
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 350px;
+  background-size: cover;
+}
+
+.main {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.steps{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.confiance, .discretion, .securite {
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 350px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.confiance div, .discretion div , .securite div {
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-left: auto;
+  margin-top: auto;
+  margin-right: auto;
+  margin-bottom: 30px;
+}
+
+.confiance {
+  background-image: url("../src/assets/confiance.jpg");
+}
+
+.discretion{
+  background-image: url("../src/assets/discretion.jpg");
+  background-position: 50% 50%;
+
+}
+
+.securite{
+  background-image: url("../src/assets/securite.jpg");
+  background-position: 100% 50%;
+
+}
+
+.container_values{
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+}
+
+.values{
+  display: flex;
+  width: 33%;
+  color: white;
+}
+
+header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+h1 {
+  color: #333;
+}
+
+p {
+  color: #555;
+}
+
+.instructions {
+  margin-bottom: 20px;
+}
+
+ol {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  margin-bottom: 10px;
+}
+
+.call-to-action {
+  background-color: #4CAF50;
+  color: #fff;
+  padding: 15px;
+  text-align: center;
+}
+
+.call-to-action p {
+  margin: 0;
+}
+
+.visuals img {
+  width: 100%;
+  height: auto;
+  margin-top: 20px;
+}
+
+.testimonials {
+  margin-top: 20px;
+}
+
+.testimonial {
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.social-media {
+  margin-top: 20px;
+}
+
+.social-icons a {
+  margin-right: 10px;
+}
+
+.about-us {
+  margin-top: 20px;
+}
+
+
+.container_number_steps {
+  display: flex;
+  gap: 35px;
+}
+
+.steps div {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.numbers_steps {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 100%;
+  padding: 10px 15px;
+  background-color: #7C9FDC;
+  font-weight: 600;
+}
 
 @keyframes logo-spin {
   from {
