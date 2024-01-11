@@ -9,8 +9,8 @@ const {ethers} = require("hardhat");
 async function main() {
   const [deployer] = await ethers.getSigners();
   console.log("Deploying contracts with the account: ", deployer.address);
-  const quizContrat = await ethers.getContractFactory("Conversation");
-  const quiz = await quizContrat.deploy('0xb68fe43f0d1a0d7aef123722670be50268e15365401c442f8806ef83b612976b');
+  const quizContrat = await ethers.getContractFactory("Chat");
+  const quiz = await quizContrat.deploy('0xabbe6325ea0d23629e7199100ba1e9ba2278c0a33a9c4bfc6cd091e5a2608f1a', '0x7a4b354a32c27a83597817ec5071ebc31c4dbe3b95f47c1216af1d5a9f110c82', '0x25471ace97aef3505bb4091399d9826090a619cafb20a2f46e4ab44d5cb64556');
 
   console.log("Quiz deployed to: ", quiz.target);
   console.log("Quiz deployed to: ", quiz.address)
