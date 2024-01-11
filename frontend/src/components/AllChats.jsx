@@ -8,7 +8,7 @@ import './AllChatsStyle.css';
 const AllChats = ({contractAddress, contractAbi}) => {
   const [accounts, setAccounts] = useState([])
   const [contract, setContract] = useState(null)
-  const [chat1Content, setChat1Content] = useState('');
+  const [chats, setChats] = useState([]);
 
   useEffect(() => {
     const init = async () => {
@@ -23,9 +23,14 @@ const AllChats = ({contractAddress, contractAbi}) => {
           const contract = new ethers.Contract(contractAddress, contractAbi, signer);
           setContract(contract)
 
-          // get chat 1
-          const chat1 = await contract.chat1();
-          setChat1Content(chat1);
+          const chat1Content = await contract.chat1();
+          const chat2Content = await contract.chat2();
+          const chat3Content = await contract.chat3();
+          setChats([
+            { id: 1, name: chat1Content },
+            { id: 2, name: chat2Content },
+            { id: 3, name: chat3Content },
+          ]);
         } catch (error) {
           console.error('Erreur lors de la connexion à MetaMask :', error);
         }
@@ -42,10 +47,12 @@ const AllChats = ({contractAddress, contractAbi}) => {
         <h2>Liste des chats</h2>
       </div>
       <div className="allcvrst-chatlistnontainer">
-        <Link to="/chat" className="allcvrst-chatcard">
-          <h3>{chat1Content}</h3>
-          <p>Nombre de participants: -</p>
-        </Link>
+        {chats.map((chat) => (
+          <Link key={chat.id} to={`/chat/${chat.id}`} className="allcvrst-chatcard">
+            <h3>{chat.name}</h3>
+            <p>Nombre de participants: -</p>
+          </Link>
+        ))}
       </div>
     </>
   );
