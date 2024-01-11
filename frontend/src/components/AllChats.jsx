@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { ethers } from 'ethers';
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types';
+import './AllChatsStyle.css';
 
 
 const AllChats = ({contractAddress, contractAbi}) => {
@@ -36,10 +37,17 @@ const AllChats = ({contractAddress, contractAbi}) => {
   }, [contractAddress, contractAbi]);
 
   return (
-    <div>
-      <h2>Page listant tous les chats</h2>
-      <Link to="/chat">{chat1Content}</Link>
-    </div>
+    <>
+      <div className="allcvrst-chatpagediv">
+        <h2>Liste des chats</h2>
+      </div>
+      <div className="allcvrst-chatlistnontainer">
+        <Link to="/chat" className="allcvrst-chatcard">
+          <h3>{chat1Content}</h3>
+          <p>Nombre de participants: -</p>
+        </Link>
+      </div>
+    </>
   );
 };
 
