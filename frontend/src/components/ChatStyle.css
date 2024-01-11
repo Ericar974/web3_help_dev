@@ -1,0 +1,142 @@
+.cvrst-chat {
+    width: 100%;
+    height: 100vh;
+    max-height: 100vh;
+    background-color: rgb(37, 37, 37);
+}
+
+.cvrst-title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 8vh;
+    background-color: rgb(37, 37, 37);
+    color: white;
+}
+
+.cvrst-chatContainerDelimiter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    max-height: 92vh;
+}
+
+.cvrst-chatContainer {
+    background-color: white;
+    width: 100%;
+    max-width: 1000px;
+    overflow-y: scroll;
+}
+
+.cvrst-messageContainer {
+    display: flex;
+    justify-content: flex-start;
+    width: 100%;
+}
+
+.cvrst-messageContainerUser {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+}
+
+.cvrst-message {
+    width: fit-content;
+    background-color: rgb(237, 237, 237);
+    max-width: 300px;
+    overflow-wrap: break-word;
+    border-radius: 4px;
+    padding: 10px;
+    border: solid rgb(37, 37, 37) 1px;
+    margin: 5px 30px 5px 30px;
+    text-align: left;
+}
+
+.cvrst-messageUser {
+    width: fit-content;
+    background-color: rgb(214, 255, 214);
+    max-width: 300px;
+    overflow-wrap: break-word;
+    border-radius: 4px;
+    padding: 10px;
+    border: solid lime 1px;
+    margin: 5px 30px 5px 30px;
+    text-align: left;
+}
+
+.cvrst-chatInteractions{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 120px;
+    background-color: #202020;
+}
+
+.cvrst-messsageInput{
+    width: 300px;
+    height: 35px;
+    background-color: white;
+    border-radius: 5px;
+    border: 0;
+    margin: 15px 5px;
+    padding: 0 10px;
+}
+  
+.cvrst-submitInput{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 150px;
+    height: 35px;
+    color: rgb(37, 37, 37);
+    background-color: white;
+    border: 0;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 15px;
+    transition: 0.25s;
+}
+
+.cvrst-submitInput:hover {
+    transform: scale(1.1);
+    background-color: lime;
+}
+
+/* New adding */
+
+.cvrst-chatpagediv {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    border-top: solid orange 2px;
+    background-color: #202020;
+    color: white;
+}
+
+.cvrst-chatpagediv h2 {
+    margin: 0;
+}
+
+.cvrst-chatpagecontent {
+    height: calc(100vh - 50px - 2px - 40px - 120px);
+    max-height: calc(100vh - 50px - 2px - 40px - 120px);
+    min-width: 420px;
+    width: 70%;
+    overflow-y: scroll;
+}
+
+.cvrst-chatpagemessages{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+}
+
+.cvrst-chatborder {
+    height: calc(100vh - 50px - 2px - 40px - 120px);
+    width: 15%;
+    background-color: #202020;
+}
