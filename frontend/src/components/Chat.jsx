@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { ethers } from 'ethers';
 import PropTypes from 'prop-types';
+import './ChatStyle.css';
 
 const Chat = ({contractAddress, contractAbi}) => {
   const [accounts, setAccounts] = useState([])
@@ -75,7 +76,9 @@ const Chat = ({contractAddress, contractAbi}) => {
 
   return (
     <div>
-      <h2>Chat Page</h2>
+      <div className="cvrst-chatpagediv">
+        <h2>Chat Page</h2>
+      </div>
       {!hasAccess ? (
         <form onSubmit={handlePasswordSubmit}>
           <label>
@@ -85,21 +88,30 @@ const Chat = ({contractAddress, contractAbi}) => {
           <button type="submit">Se connecter</button>
         </form>
       ) : (
-        <div>
-          <h3>Messages</h3>
-          <ul>
-            {messages.map((msg, index) => (
-              <li key={index}>{`${msg.user}: ${msg.content}`}</li>
-            ))}
-          </ul>
+        <>
+          <div className="cvrst-chatpagemessages">
+            <div class="cvrst-chatborder"></div>
+            <div className="cvrst-chatpagecontent">
+              {messages.map((message, index) => ( message.user !== "0x0000000000000000000000000000000000000000" ? (
+                <div className={`${message.user.toLowerCase() === accounts[0] ? "cvrst-messageContainerUser" : "cvrst-messageContainer"}`} key={index}>
+                  <div className={`${message.user.toLowerCase() === accounts[0] ? "cvrst-messageUser" : "cvrst-message"}`}>
+                    {message.user.toLowerCase()} <br />
+                    {message.content} <br />
+                    {message.timestamp}
+                  </div>
+                </div>
+                ) : null
+              ))}
+            </div>
+            <div class="cvrst-chatborder"></div>
+          </div>
           <form onSubmit={handleNewMessageSubmit}>
-            <label>
-              Nouveau message :
-              <input type="text" value={newMessage} onChange={(e) => setNewMessage(e.target.value)} />
-            </label>
-            <button type="submit">Envoyer</button>
+            <div className='cvrst-chatInteractions'>
+                <input className="cvrst-messsageInput" type="text" placeholder="Votre message" value={newMessage} onChange={(e) => setNewMessage(e.target.value)}/>
+                <button className="cvrst-submitInput" type="submit">Envoyer</button>
+            </div>
           </form>
-        </div>
+        </>
       )}
     </div>
   );
