@@ -2,34 +2,56 @@ import { useState, useEffect } from 'react';
 import { ethers } from 'ethers';
 import PropTypes from 'prop-types';
 import './ChatStyle.css';
+import { useParams } from 'react-router-dom';
 
-const Chat = ({contractAddress, contractAbi}) => {
-  const [accounts, setAccounts] = useState([])
-  const [contract, setContract] = useState(null)
+const Chat = ({ contractAddress, contractAbi }) => {
+  const [accounts, setAccounts] = useState([]);
+  const [contract, setContract] = useState(null);
   const [password, setPassword] = useState('');
-  const [hasAccess, setHasAccess] = useState(false); 
+  const [hasAccess, setHasAccess] = useState(false);
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState('');
+  const { id: chatId } = useParams();  // Utilisez le paramètre d'URL chatId directement
 
   useEffect(() => {
     const init = async () => {
       if (window.ethereum) {
         try {
-          //connect to account
-          const accounts = await window.ethereum.request({method: "eth_requestAccounts"})
-          setAccounts(accounts)
-          const provider = new ethers.BrowserProvider(window.ethereum)
+          const accounts = await window.ethereum.request({ method: "eth_requestAccounts" });
+          setAccounts(accounts);
+          await window.ethereum.enable();
+          const provider = new ethers.BrowserProvider(window.ethereum);
           const signer = await provider.getSigner();
           const contract = new ethers.Contract(contractAddress, contractAbi, signer);
-          setContract(contract)
+          setContract(contract);
 
-          // Access to the chat ?
-          const hasAccess = await contract.accessChat1(accounts[0]);
+          // Access to the chat?
+          let hasAccess = false;
+          if(chatId == 1){
+            hasAccess = await contract.accessChat1(accounts[0]);
+          }else if( chatId == 2){
+            hasAccess = await contract.accessChat2(accounts[0]);
+          }else if( chatId == 3){
+            hasAccess = await contract.accessChat3(accounts[0]);
+          }else{
+            hasAccess = false;
+          }
           setHasAccess(hasAccess);
 
-          // if it's, show 10last message
+          // If it's, show 10 last messages
           if (hasAccess) {
-            const latestMessages = await contract.Chat1GetLast10MessagesFromAllUsers();
+            var latestMessages;
+            if(chatId == 1){
+              latestMessages = await contract.getChat1Last10Messages();
+    
+            }else if( chatId == 2){
+              latestMessages = await contract.getChat2Last10Messages();
+    
+            }else if( chatId == 3){
+              latestMessages = await contract.getChat3Last10Messages();
+            }else{
+              console.error('chatId introuvable');
+            }
             setMessages(latestMessages);
           }
         } catch (error) {
@@ -41,19 +63,50 @@ const Chat = ({contractAddress, contractAbi}) => {
     };
 
     init();
-  }, [contractAddress, contractAbi]);
+  }, [contractAddress, contractAbi, chatId]);
 
-  // password form
+  // Password form
   const handlePasswordSubmit = async (e) => {
     e.preventDefault();
     try {
-      await contract.EnterChat1(password);
-      // show if has access to the chat now
-      const hasAccess = await contract.accessChat1(accounts[0]);
+      if(chatId == 1){
+        await contract.EnterChat1(password);
+
+      }else if( chatId == 2){
+        await contract.EnterChat2(password);
+
+      }else if( chatId == 3){
+        await contract.EnterChat3(password);
+      }else{
+        console.error('chatId introuvable');
+      }
+
+      // Show if has access to the chat now
+      let hasAccess = hasAccess;
+      if(chatId == 1){
+        hasAccess = await contract.accessChat1(accounts[0]);
+      }else if( chatId == 2){
+        hasAccess = await contract.accessChat2(accounts[0]);
+      }else if( chatId == 3){
+        hasAccess = await contract.accessChat3(accounts[0]);
+      }else{
+        hasAccess = false;
+      }
       setHasAccess(hasAccess);
 
       if (hasAccess) {
-        const latestMessages = await contract.Chat1GetLast10MessagesFromAllUsers();
+        var latestMessages;
+        if(chatId == 1){
+          latestMessages = await contract.getChat1Last10Messages();
+
+        }else if( chatId == 2){
+          latestMessages = await contract.getChat2Last10Messages();
+
+        }else if( chatId == 3){
+          latestMessages = await contract.getChat3Last10Messages();
+        }else{
+          console.error('chatId introuvable');
+        }
         setMessages(latestMessages);
       }
     } catch (error) {
@@ -61,13 +114,33 @@ const Chat = ({contractAddress, contractAbi}) => {
     }
   };
 
-  // new message
+  // New message
   const handleNewMessageSubmit = async (e) => {
     e.preventDefault();
     try {
-      await contract.chat1PostMessage(newMessage);
+      
+      if(chatId == 1){
+        await contract.chat1PostMessage(newMessage);
+      }else if( chatId == 2){
+        await contract.chat2PostMessage(newMessage);
+      }else if( chatId == 3){
+        await contract.chat3PostMessage(newMessage);
+      }else{
+        console.error('chatId introuvable');
+      }
 
-      const latestMessages = await contract.Chat1GetLast10MessagesFromAllUsers();
+      var latestMessages;
+        if(chatId == 1){
+          latestMessages = await contract.getChat1Last10Messages();
+
+        }else if( chatId == 2){
+          latestMessages = await contract.getChat2Last10Messages();
+
+        }else if( chatId == 3){
+          latestMessages = await contract.getChat3Last10Messages();
+        }else{
+          console.error('chatId introuvable');
+        }
       setMessages(latestMessages);
     } catch (error) {
       console.error('Erreur lors de l\'envoi du nouveau message :', error);
@@ -90,9 +163,9 @@ const Chat = ({contractAddress, contractAbi}) => {
       ) : (
         <>
           <div className="cvrst-chatpagemessages">
-            <div class="cvrst-chatborder"></div>
+            <div className="cvrst-chatborder"></div>
             <div className="cvrst-chatpagecontent">
-              {messages.map((message, index) => ( message.user !== "0x0000000000000000000000000000000000000000" ? (
+            {messages.map((message, index) => ( message.user !== "0x0000000000000000000000000000000000000000" ? (
                 <div className={`${message.user.toLowerCase() === accounts[0] ? "cvrst-messageContainerUser" : "cvrst-messageContainer"}`} key={index}>
                   <div className={`${message.user.toLowerCase() === accounts[0] ? "cvrst-messageUser" : "cvrst-message"}`}>
                     {message.user.toLowerCase()} <br />
@@ -103,12 +176,12 @@ const Chat = ({contractAddress, contractAbi}) => {
                 ) : null
               ))}
             </div>
-            <div class="cvrst-chatborder"></div>
+            <div className="cvrst-chatborder"></div>
           </div>
           <form onSubmit={handleNewMessageSubmit}>
             <div className='cvrst-chatInteractions'>
-                <input className="cvrst-messsageInput" type="text" placeholder="Votre message" value={newMessage} onChange={(e) => setNewMessage(e.target.value)}/>
-                <button className="cvrst-submitInput" type="submit">Envoyer</button>
+              <input className="cvrst-messsageInput" type="text" placeholder="Votre message" value={newMessage} onChange={(e) => setNewMessage(e.target.value)} />
+              <button className="cvrst-submitInput" type="submit">Envoyer</button>
             </div>
           </form>
         </>

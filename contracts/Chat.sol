@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-contract Conversation {
+contract Chat {
 
     string public chat1 = "Chat 1";
     string public chat2 = "Chat 2";
