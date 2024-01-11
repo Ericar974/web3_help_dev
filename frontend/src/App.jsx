@@ -26,9 +26,6 @@ const router = createBrowserRouter([
           <Link to="/allchats" className="nav-link" activeClassName="current">
             Lists des chats
           </Link>
-          <Link to="/chat" className="nav-link" activeClassName="current">
-            Chat
-          </Link>
         </div>
       </nav>
 
@@ -38,28 +35,7 @@ const router = createBrowserRouter([
   {
     path: "/chat",
     element: <div>
-      <nav className="nav">
-        <div>
-          <div className="header_logo">
-            <img className="logo" src="../src/assets/logo.png"></img>
-          </div>
-          <Link to="/" className="nav-link" activeClassName="current">
-            Page accueil
-          </Link>
-          <Link to="/allchats" className="nav-link" activeClassName="current">
-            Lists des chats
-          </Link>
-          <Link to="/chat" className="nav-link" activeClassName="current">
-            Chat
-          </Link>
-        </div>
-      </nav>
 
-      <Chat/>
-      <nav>
-        <Link to="/">Page accueil</Link>
-        <Link to="/allchats">Lists des chats</Link>
-      </nav>
       <Chat contractAddress={contractAddress} contractAbi={contractAbi}
       />
     </div>
@@ -79,17 +55,9 @@ const router = createBrowserRouter([
           <Link to="/allchats" className="nav-link" activeClassName="current">
             Lists des chats
           </Link>
-          <Link to="/chat" className="nav-link" activeClassName="current">
-            Chat
-          </Link>
         </div>
       </nav>
 
-      <AllChats/>
-      <nav>
-        <Link to="/">Page accueil</Link>
-        <Link to="/allchats">Lists des chats</Link>
-      </nav>
       <AllChats contractAddress={contractAddress} contractAbi={contractAbi}
       />
     </div>
@@ -101,9 +69,6 @@ function App() {
 
   return (
     <>
-
-<header>
-  </header>
       <RouterProvider router={router}/>
     </>
   )

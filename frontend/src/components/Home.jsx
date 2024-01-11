@@ -57,8 +57,8 @@ const Home = () => {
       <footer className="social-media">
         <h2>Rejoignez-nous sur les réseaux sociaux :</h2>
         <div className="social-icons">
-          <a href="lien-vers-votre-page-facebook"><img src="icone-facebook.png" alt="Facebook" /></a>
-          <a href="lien-vers-votre-page-twitter"><img src="icone-twitter.png" alt="Twitter" /></a>
+          <a href="lien-vers-votre-page-facebook"><img src="../src/assets/facebook.svg" alt="Facebook" /></a>
+          <a href="lien-vers-votre-page-twitter"><img src="../src/assets/twitter.svg" alt="Twitter" /></a>
         </div>
       </footer>
     </div>

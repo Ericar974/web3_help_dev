@@ -198,10 +198,21 @@ li {
 
 .social-media {
   margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.social-icons {
+  display: flex;
+  justify-content: center;
 }
 
 .social-icons a {
   margin-right: 10px;
+  width: 25px;
+}
+
+.social-icons a img{
+  width: 100%;
 }
 
 .about-us {
@@ -232,11 +243,17 @@ li {
 /* boutons menu*/
 
 .bouton_menu {
-  padding: 15px 20px;
+  padding: 20px 25px;
   background-color: #1F46C6;
   color: white;
   border-radius: 9px;
-  margin-top: 15px; /* Ajoutez un espace en haut pour l'esthétique */
+  margin-top: 15px;
+  margin-right: auto;
+  font-size: 1.2rem;
+  font-family: monospace;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin-left: 25px;
 }
 
 /* logo */
