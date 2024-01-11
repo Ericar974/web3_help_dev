@@ -14,20 +14,28 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <div>
-      <nav className='app-nav'>
-        <Link to="/" className='app-navlink'>Page d'accueil</Link>
-        <Link to="/allchats" className='app-navlink'>Liste des chats</Link>
+      <nav className="nav">
+        <div>
+          
+  <div className="header_logo">
+    <img className="logo" src="../src/assets/logo.png"></img>
+  </div>
+          <Link to="/" className="nav-link" activeClassName="current">
+            Page accueil
+          </Link>
+          <Link to="/allchats" className="nav-link" activeClassName="current">
+            Lists des chats
+          </Link>
+        </div>
       </nav>
-      <Home />
-    </div>
+
+      <Home/>
+      </div>
   },
   {
     path: "/chat",
     element: <div>
-      <nav className='app-nav'>
-        <Link to="/" className='app-navlink'>Page d'accueil</Link>
-        <Link to="/allchats" className='app-navlink'>Liste des chats</Link>
-      </nav>
+
       <Chat contractAddress={contractAddress} contractAbi={contractAbi}
       />
     </div>
@@ -35,10 +43,21 @@ const router = createBrowserRouter([
   {
     path: "/allchats",
     element: <div>
-      <nav className='app-nav'>
-        <Link to="/" className='app-navlink'>Page d'accueil</Link>
-        <Link to="/allchats" className='app-navlink'>Liste des chats</Link>
+      <nav className="nav">
+        <div>
+          
+  <div className="header_logo">
+    <img className="logo" src="../src/assets/logo.png"></img>
+  </div>
+          <Link to="/" className="nav-link" activeClassName="current">
+            Page accueil
+          </Link>
+          <Link to="/allchats" className="nav-link" activeClassName="current">
+            Lists des chats
+          </Link>
+        </div>
       </nav>
+
       <AllChats contractAddress={contractAddress} contractAbi={contractAbi}
       />
     </div>
@@ -50,7 +69,7 @@ function App() {
 
   return (
     <>
-      <RouterProvider router={router} />
+      <RouterProvider router={router}/>
     </>
   )
 }
