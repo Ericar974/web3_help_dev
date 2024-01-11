@@ -140,3 +140,26 @@
     width: 15%;
     background-color: #202020;
 }
+
+.chat_page_front {
+    background-color: #1F46FF;
+    color: white;
+    gap: 25px;
+    display: flex;
+}
+
+.chat_page_front form{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 45%;
+    padding: 150px 75px;
+}
+
+.image_side{
+    background-image: url('../src/assets/mastere-expert-it-cybersecurite.jpg');
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100%;
+}

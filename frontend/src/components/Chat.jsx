@@ -79,6 +79,7 @@ const Chat = ({contractAddress, contractAbi}) => {
       <div className="cvrst-chatpagediv">
         <h2>Chat Page</h2>
       </div>
+      <div class="chat_page_front">
       {!hasAccess ? (
         <form onSubmit={handlePasswordSubmit}>
           <label>
@@ -88,6 +89,7 @@ const Chat = ({contractAddress, contractAbi}) => {
           <button type="submit">Se connecter</button>
         </form>
       ) : (
+        
         <>
           <div className="cvrst-chatpagemessages">
             <div class="cvrst-chatborder"></div>
@@ -113,6 +115,9 @@ const Chat = ({contractAddress, contractAbi}) => {
           </form>
         </>
       )}
+      <div class="image_side">
+      </div>
+    </div>
     </div>
   );
 };
