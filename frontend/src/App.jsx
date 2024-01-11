@@ -16,10 +16,10 @@ const router = createBrowserRouter([
     element: <div>
       <nav className="nav">
         <div>
-          
-  <div className="header_logo">
-    <img className="logo" src="../src/assets/logo.png"></img>
-  </div>
+
+          <div className="header_logo">
+            <img className="logo" src="../src/assets/logo.png"></img>
+          </div>
           <Link to="/" className="nav-link" activeClassName="current">
             Page accueil
           </Link>
@@ -29,13 +29,27 @@ const router = createBrowserRouter([
         </div>
       </nav>
 
-      <Home/>
-      </div>
+      <Home />
+    </div>
   },
   {
     path: "/chat/:id",
     element: <div>
 
+      <nav className="nav">
+        <div>
+
+          <div className="header_logo">
+            <img className="logo" src="../src/assets/logo.png"></img>
+          </div>
+          <Link to="/" className="nav-link" activeClassName="current">
+            Page accueil
+          </Link>
+          <Link to="/allchats" className="nav-link" activeClassName="current">
+            Lists des chats
+          </Link>
+        </div>
+      </nav>
       <Chat contractAddress={contractAddress} contractAbi={contractAbi}
       />
     </div>
@@ -45,10 +59,10 @@ const router = createBrowserRouter([
     element: <div>
       <nav className="nav">
         <div>
-          
-  <div className="header_logo">
-    <img className="logo" src="../src/assets/logo.png"></img>
-  </div>
+
+          <div className="header_logo">
+            <img className="logo" src="../src/assets/logo.png"></img>
+          </div>
           <Link to="/" className="nav-link" activeClassName="current">
             Page accueil
           </Link>
@@ -69,7 +83,7 @@ function App() {
 
   return (
     <>
-      <RouterProvider router={router}/>
+      <RouterProvider router={router} />
     </>
   )
 }
