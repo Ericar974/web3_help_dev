@@ -1,42 +1,85 @@
 const {
   loadFixture,
 } = require("@nomicfoundation/hardhat-toolbox/network-helpers");
-const { anyValue } = require("@nomicfoundation/hardhat-chai-matchers/withArgs");
 const { expect } = require("chai");
-const {ethers} = require("hardhat");
+const { ethers } = require("hardhat");
 
-describe("JavascriptQuiz", function () {
-  // We define a fixture to reuse the same setup in every test.
-  // We use loadFixture to run this setup once, snapshot that state,
-  // and reset Hardhat Network to that snapshot in every test.
-  async function deployQuiz() {
-    // Contracts are deployed using the first signer/account by default
+describe("Chat", function () {
+  async function deployConversation() {
     const [deployer, addr1, addr2] = await ethers.getSigners();
+    const chatContract = await ethers.getContractFactory("Chat");
+    const chat = await chatContract.deploy(
+      "0xabbe6325ea0d23629e7199100ba1e9ba2278c0a33a9c4bfc6cd091e5a2608f1a",
+      "0x7a4b354a32c27a83597817ec5071ebc31c4dbe3b95f47c1216af1d5a9f110c82",
+      "0x25471ace97aef3505bb4091399d9826090a619cafb20a2f46e4ab44d5cb64556"
+    );
 
-    const quizContrat = await ethers.getContractFactory("JavaScriptQuiz");
-    const quiz = await quizContrat.deploy("0x1572b593c53d839d80004aa4b8c51211864104f06ace9e22be9c4365b50655ea");
-
-    return { deployer, quiz, addr1, addr2 };
+    return { deployer, chat, addr1, addr2 };
   }
 
   describe("Deployment", function () {
-    it('should block the owner', async function () {
-      const {quiz} = await loadFixture(deployQuiz);
 
-      await expect(quiz.answerQuiz("0x1572b593c53d839d80004aa4b8c51211864104f06ace9e22be9c4365b50655ea")).to.be.revertedWith('Owner cannot answer the quiz.');
+    it('should block the user from accessing chat 1 with wrong password', async function () {
+      const { chat, addr1 } = await loadFixture(deployConversation);
+      await expect(chat.connect(addr1).EnterChat1("wrong1")).to.emit(chat, "WrongAnswer");
     });
 
-    it('should emit WrongAnswer event', async function () {
-      const {quiz, addr1} = await loadFixture(deployQuiz);
+    it('should allow the user to access chat 1 with the correct password', async function () {
+      const { chat, addr1 } = await loadFixture(deployConversation);
+      await expect(chat.connect(addr1).EnterChat1("password1")).to.emit(chat, "CorrectAnswer");
+    });
 
-      await expect(await quiz.connect(addr1).answerQuiz("5")).to.emit(quiz, "WrongAnswer");
-    })
+    it('should block the user from accessing chat 2 with wrong password', async function () {
+      const { chat, addr1 } = await loadFixture(deployConversation);
+      await expect(chat.connect(addr1).EnterChat2("wrong2")).to.emit(chat, "WrongAnswer");
+    });
 
-    it('should emit CorrectAnswer event', async function () {
-      const {quiz, addr1} = await loadFixture(deployQuiz);
+    it('should allow the user to access chat 2 with the correct password', async function () {
+      const { chat, addr1 } = await loadFixture(deployConversation);
+      await expect(chat.connect(addr1).EnterChat2("password2")).to.emit(chat, "CorrectAnswer");
+    });
 
-      await expect(await quiz.connect(addr1).answerQuiz("23")).to.emit(quiz, "CorrectAnswer");
-    })
+    it('should block the user from accessing chat 3 with wrong password', async function () {
+      const { chat, addr1 } = await loadFixture(deployConversation);
+      await expect(chat.connect(addr1).EnterChat3("wrong3")).to.emit(chat, "WrongAnswer");
+    });
 
+    it('should allow the user to access chat 3 with the correct password', async function () {
+      const { chat, addr1 } = await loadFixture(deployConversation);
+      await expect(chat.connect(addr1).EnterChat3("password3")).to.emit(chat, "CorrectAnswer");
+    });
+
+    it('should allow user to connect to Chat 1, write a message, and retrieve messages', async function () {
+      const { chat, addr1 } = await loadFixture(deployConversation);
+      await chat.connect(addr1).EnterChat1("password1");
+      const messageContent = "Hello, Chat 1!";
+      await chat.connect(addr1).chat1PostMessage(messageContent);
+      const lastMessages = await chat.connect(addr1).getChat1Last10Messages();
+      expect(lastMessages.length).to.equal(10);
+      expect(lastMessages[0].user).to.equal(addr1.address);
+      expect(lastMessages[0].content).to.equal(messageContent);
+    });
+
+    it('should allow user to connect to Chat 2, write a message, and retrieve messages', async function () {
+      const { chat, addr1 } = await loadFixture(deployConversation);
+      await chat.connect(addr1).EnterChat2("password2");
+      const messageContent = "Hello, Chat 2!";
+      await chat.connect(addr1).chat2PostMessage(messageContent);
+      const lastMessages = await chat.connect(addr1).getChat2Last10Messages();
+      expect(lastMessages.length).to.equal(10);
+      expect(lastMessages[0].user).to.equal(addr1.address);
+      expect(lastMessages[0].content).to.equal(messageContent);
+    });
+
+    it('should allow user to connect to Chat 3, write a message, and retrieve messages', async function () {
+      const { chat, addr1 } = await loadFixture(deployConversation);
+      await chat.connect(addr1).EnterChat3("password3");
+      const messageContent = "Hello, Chat 3!";
+      await chat.connect(addr1).chat3PostMessage(messageContent);
+      const lastMessages = await chat.connect(addr1).getChat3Last10Messages();
+      expect(lastMessages.length).to.equal(10);
+      expect(lastMessages[0].user).to.equal(addr1.address);
+      expect(lastMessages[0].content).to.equal(messageContent);
+    });
   });
-});
+})
